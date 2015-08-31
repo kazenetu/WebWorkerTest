@@ -1,0 +1,12 @@
+{
+	"name": "WebWorkerTest",
+	"version": "1.0.0",
+	"description": "WebWorkerのテスト",
+	"author": "kazenetu",
+	"url": "https://github.com/kazenetu/WebWorkerTest",
+	"license": "MIT License",
+	"keywords": "WebWorker Sample",
+	"devDependencies":{
+		"gulp": "*"
+	}
+}

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script>
+        var count = 0;
+        var worker = new Worker('Worker.js');
+
+        worker.addEventListener('message', function (e) {
+            console.log('Worker said: ', e.data);
+            console.log('Worker data: ', typeof e.data);
+
+            updateView(JSON.parse(e.data));
+        }, false);
+
+
+        $(function () {
+            $("#request").on("click", function (e) {
+                var baseUrl = location.origin;
+                worker.postMessage(
+                    JSON.stringify({
+                        baseUrl: baseUrl,
+                        cmd: "post",
+                        param: encodeURI("a=123&b=aaaa&あ=えおあお&count=" + count.toString())
+                    })
+                );
+                count++;
+            });
+        });
+
+        function updateView(result) {
+            var detail = "[" + result.count + "]\r\n";
+
+            for (var key in result) {
+                detail += "  " + key + " = " + result[key] + '\r\n';
+            }
+
+            $('#result').val($('#result').val() + '\r\n' + detail);
+        };
+    </script>
+</head>
+<body>
+    <button type="button" id="request">リクエスト</button>
+    <textarea id="result" rows="100" cols="300"></textarea>
+</body>
+</html>
