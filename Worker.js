@@ -4,8 +4,8 @@
     switch (data.cmd) {
         case "post":
             var xhr = new XMLHttpRequest();
-            // 非同期モードで送信 
-            xhr.open('post', data.baseUrl + '/json.aspx', true);
+            // 非同期モードで送信
+            xhr.open('post', data.baseUrl + '/', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 if (this.readyState === 4) {
