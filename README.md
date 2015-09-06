@@ -2,9 +2,9 @@
 WebWorkerの実装テスト
 
 ## 利用方法
-1. ’’’npm install’’’ 実行
-1. ’’’gulp’’’ 実行（Webサーバーが立ち上がる）
-1. ブラウザで'''http://localhost:8000'''にアクセス
+1. ```npm install``` 実行
+1. ```gulp``` 実行（Webサーバーが立ち上がる）
+1. ブラウザで```http://localhost:8000```にアクセス
 1. 「リクエスト」ボタンクリックでWebWorkerからWebサーバにPOST発行
 
 ## 参考にしたサイト様
