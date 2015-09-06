@@ -1,3 +1,4 @@
+//参考にさせていただいたサイト（README.md 参照）
 //外部ファイルの読み込み（ベース処理）
 //http://qiita.com/morou/items/6a1b9d09a8500f2f62e4「node.jsで動作するシンプルなWebサーバ」
 //POSTデータの扱い
@@ -43,19 +44,14 @@ gulp.task('default',function(){
 	  function sendFile(req, res, filePath) {
 
 	    var file = fs.createReadStream(filePath);
-	    file.on("readable", function() {
-				console.log("<- " +  mime[path.extname(filePath)] || "text/plain");
-	    });
 
 	    file.on("data", function(data) {
 				res.writeHead(200, {"Content-Type": mime[path.extname(filePath)] || "text/plain"});
 	      res.write(data);
-				console.log("<- " +  data);
 	    });
 
 	    file.on("end", function() {
 	      res.end();
-	      console.log("<- " + message[200] + ": " + req.method + " " + req.url);
 	    });
 
 	    file.on("error", function(err) {
@@ -70,7 +66,6 @@ gulp.task('default',function(){
 	    res.writeHead(statusCode, {"Content-Type": "text/html"});
 	    res.write("<!DOCTYPE html><html><body><h1>" + message[statusCode] + "</h1></body></html>");
 	    res.end();
-	    console.log("<- " + message[statusCode] + ": " + req.method + " " + req.url);
 	  }
 
 	  //
@@ -95,15 +90,11 @@ http.createServer(function (req, res) {
 			if (req.method === "GET")
 			{
 				var pathName = url.parse(req.url).pathname;
-				console.log("-> " + req.method + " " + pathName);
 				handleRequest(req, res, path.join(root, pathName));
 			}else{
-				console.log("-> " + req.method);
-
 				var postData = "";
 
 				req.on("data", function(chunk) {
-					console.log("-> " + "data" + " " + chunk);
 						postData += chunk;
 				});
 				req.on("end", function() {
